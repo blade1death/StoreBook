@@ -8,5 +8,6 @@ namespace Store.domain
         Book[] GetByIsbn(string isbn);
         Book[] GetAllByTitleorAuthor(string titlePart);
         Book GetById(int id);
+        Book[] GetAllByIds(IEnumerable<int> bookIds);
     }
 }
