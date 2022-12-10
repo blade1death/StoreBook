@@ -1,5 +1,7 @@
+using Store.Contractors;
 using Store.domain;
 using Store.infrastructure;
+using Store.Messages;
 using System;
 using System.Net.Security;
 
@@ -11,6 +13,8 @@ builder.Services.AddSingleton<IBookRepository,BookRepository>();
 builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
 builder.Services.AddSingleton<BookService>();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSingleton<INotificationService, DebugNotificationService>();
+builder.Services.AddSingleton<IDeliveryService, PostamateDeliveryService>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSession(options =>
 {
