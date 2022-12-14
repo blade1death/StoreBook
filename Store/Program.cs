@@ -2,19 +2,24 @@ using Store.Contractors;
 using Store.domain;
 using Store.infrastructure;
 using Store.Messages;
-using System;
-using System.Net.Security;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IBookRepository,BookRepository>();
-builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
+
+builder.Services.AddEfRepositories(builder.Configuration.GetConnectionString("Store"));
 builder.Services.AddSingleton<BookService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSingleton<INotificationService, DebugNotificationService>();
 builder.Services.AddSingleton<IDeliveryService, PostamateDeliveryService>();
+builder.Services.AddSingleton<IPaymentService, CashPaymentService>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSession(options =>
 {

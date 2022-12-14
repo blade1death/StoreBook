@@ -5,13 +5,13 @@ namespace Store.Contractors
 {
     public interface IDeliveryService
     {
-        string Name { get; }
+        string UniqueCode { get; }
 
         string Title { get; }
 
-        Form FirstForm(Order order);
+        Form CreateForm(Order order);
 
-        Form NextForm(int step, IReadOnlyDictionary<string, string> values);
+        Form MoveNextForm(int orderId, int step, IReadOnlyDictionary<string, string> values);
 
         OrderDelivery GetDelivery(Form form);
     }

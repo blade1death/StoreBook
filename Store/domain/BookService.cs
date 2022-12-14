@@ -1,18 +1,44 @@
-﻿namespace Store.domain
+﻿using Store.Models;
+
+namespace Store.domain
 {
     public class BookService
     {
         private readonly IBookRepository bookRepository;
+
         public BookService(IBookRepository bookRepository)
         {
             this.bookRepository = bookRepository;
         }
 
-        public Book[] GetAllByQuery(string query)
+        public BookModel GetById(int id)
         {
-            if(Book.IsIsbn(query))
-                return bookRepository.GetByIsbn(query);
-            return bookRepository.GetAllByTitleorAuthor(query);
+            var book = bookRepository.GetById(id);
+
+            return Map(book);
+        }
+
+        public IReadOnlyCollection<BookModel> GetAllByQuery(string query)
+        {
+            var books = Book.IsIsbn(query)
+                      ? bookRepository.GetAllByIsbn(query)
+                      : bookRepository.GetAllByTitleOrAuthor(query);
+
+            return books.Select(Map)
+                        .ToArray();
+        }
+
+        private BookModel Map(Book book)
+        {
+            return new BookModel
+            {
+                Id = book.Id,
+                Isbn = book.Isbn,
+                Title = book.Title,
+                Author = book.Author,
+                Description = book.Description,
+                Price = book.Price,
+            };
         }
     }
 }
