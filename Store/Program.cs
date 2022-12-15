@@ -13,14 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddEfRepositories(builder.Configuration.GetConnectionString("Store"));
 builder.Services.AddSingleton<BookService>();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<INotificationService, DebugNotificationService>();
 builder.Services.AddSingleton<IDeliveryService, PostamateDeliveryService>();
 builder.Services.AddSingleton<IPaymentService, CashPaymentService>();
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddSingleton<BookService>();
+builder.Services.AddSingleton<OrderService>();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(20);

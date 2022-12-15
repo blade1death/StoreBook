@@ -13,8 +13,11 @@ namespace Store.infrastructure
                 {
                     options.UseSqlServer(connectionString);
                 },
-            ServiceLifetime.Transient
+                ServiceLifetime.Transient
             );
+
+            services.AddScoped<Dictionary<Type, StoreDbContext>>();
+            services.AddSingleton<DbContextFactory>();
             services.AddSingleton<IBookRepository, BookRepository>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
 

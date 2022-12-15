@@ -12,15 +12,18 @@ namespace Store.infrastructure
         public DbSet<OrderDto> Orders { get; set; }
 
         public DbSet<OrderItemDto> OrderItems { get; set; }
+
         public StoreDbContext(DbContextOptions<StoreDbContext> options)
             : base(options)
         { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             BuildBooks(modelBuilder);
             BuildOrders(modelBuilder);
             BuildOrderItems(modelBuilder);
         }
+
         private void BuildOrderItems(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderItemDto>(action =>
@@ -33,6 +36,7 @@ namespace Store.infrastructure
                       .IsRequired();
             });
         }
+
         private static void BuildOrders(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderDto>(action =>
@@ -62,14 +66,16 @@ namespace Store.infrastructure
                       .Metadata.SetValueComparer(DictionaryComparer);
             });
         }
+
         private static readonly ValueComparer DictionaryComparer =
             new ValueComparer<Dictionary<string, string>>(
-             (dictionary1, dictionary2) => dictionary1.SequenceEqual(dictionary2),
-             dictionary => dictionary.Aggregate(
-                0,
-                 (a, p) => HashCode.Combine(HashCode.Combine(a, p.Key.GetHashCode()), p.Value.GetHashCode())
-             )
-        );
+                (dictionary1, dictionary2) => dictionary1.SequenceEqual(dictionary2),
+                dictionary => dictionary.Aggregate(
+                    0,
+                    (a, p) => HashCode.Combine(HashCode.Combine(a, p.Key.GetHashCode()), p.Value.GetHashCode())
+                )
+            );
+
         private static void BuildBooks(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BookDto>(action =>
@@ -88,7 +94,7 @@ namespace Store.infrastructure
                     new BookDto
                     {
                         Id = 1,
-                        Isbn = "ISBN0131101633",
+                        Isbn = "ISBN0201038013",
                         Author = "D. Knuth",
                         Title = "Art Of Programming, Vol. 1",
                         Description = "This volume begins with basic programming concepts and techniques, then focuses more particularly on information structures-the representation of information inside a computer, the structural relationships between data elements and how to deal with them efficiently.",
@@ -97,7 +103,7 @@ namespace Store.infrastructure
                     new BookDto
                     {
                         Id = 2,
-                        Isbn = "ISBN0201038013",
+                        Isbn = "ISBN0201485672",
                         Author = "M. Fowler",
                         Title = "Refactoring",
                         Description = "As the application of object technology--particularly the Java programming language--has become commonplace, a new problem has emerged to confront the software development community.",
@@ -106,7 +112,7 @@ namespace Store.infrastructure
                     new BookDto
                     {
                         Id = 3,
-                        Isbn = "ISBN0201485672",
+                        Isbn = "ISBN0131101633",
                         Author = "B. W. Kernighan, D. M. Ritchie",
                         Title = "C Programming Language",
                         Description = "Known as the bible of C, this classic bestseller introduces the C programming language and illustrates algorithms, data structures, and programming techniques.",

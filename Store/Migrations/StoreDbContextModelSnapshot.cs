@@ -17,161 +17,141 @@ namespace Store.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.Entity("Store.Data.BookDto", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Store.DTO.BookDto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                b.Property<string>("Author")
+                    .HasColumnType("nvarchar(max)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                b.Property<string>("Description")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Isbn")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(17)")
+                    .HasMaxLength(17);
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("money");
 
-                    b.Property<string>("Isbn")
-                        .IsRequired()
-                        .HasMaxLength(17)
-                        .HasColumnType("nvarchar(17)");
+                b.Property<string>("Title")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money");
+                b.HasKey("Id");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.ToTable("Books");
 
-                    b.HasKey("Id");
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        Author = "D. Knuth",
+                        Description = "This volume begins with basic programming concepts and techniques, then focuses more particularly on information structures-the representation of information inside a computer, the structural relationships between data elements and how to deal with them efficiently.",
+                        Isbn = "ISBN0201038013",
+                        Price = 7.19m,
+                        Title = "Art Of Programming, Vol. 1"
+                    },
+                    new
+                    {
+                        Id = 2,
+                        Author = "M. Fowler",
+                        Description = "As the application of object technology--particularly the Java programming language--has become commonplace, a new problem has emerged to confront the software development community.",
+                        Isbn = "ISBN0201485672",
+                        Price = 12.45m,
+                        Title = "Refactoring"
+                    },
+                    new
+                    {
+                        Id = 3,
+                        Author = "B. W. Kernighan, D. M. Ritchie",
+                        Description = "Known as the bible of C, this classic bestseller introduces the C programming language and illustrates algorithms, data structures, and programming techniques.",
+                        Isbn = "ISBN0131101633",
+                        Price = 14.98m,
+                        Title = "C Programming Language"
+                    });
+            });
 
-                    b.ToTable("Books");
+            modelBuilder.Entity("Store.Data.OrderDto", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Author = "D. Knuth",
-                            Description = "This volume begins with basic programming concepts and techniques, then focuses more particularly on information structures-the representation of information inside a computer, the structural relationships between data elements and how to deal with them efficiently.",
-                            Isbn = "ISBN0131101633",
-                            Price = 7.19m,
-                            Title = "Art Of Programming, Vol. 1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Author = "M. Fowler",
-                            Description = "As the application of object technology--particularly the Java programming language--has become commonplace, a new problem has emerged to confront the software development community.",
-                            Isbn = "ISBN0201038013",
-                            Price = 12.45m,
-                            Title = "Refactoring"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Author = "B. W. Kernighan, D. M. Ritchie",
-                            Description = "Known as the bible of C, this classic bestseller introduces the C programming language and illustrates algorithms, data structures, and programming techniques.",
-                            Isbn = "ISBN0201485672",
-                            Price = 14.98m,
-                            Title = "C Programming Language"
-                        });
-                });
+                b.Property<string>("CellPhone")
+                    .HasColumnType("nvarchar(20)")
+                    .HasMaxLength(20);
 
-            modelBuilder.Entity("Store.DTO.OrderDto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                b.Property<string>("DeliveryDescription")
+                    .HasColumnType("nvarchar(max)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                b.Property<string>("DeliveryParameters")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CellPhone")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                b.Property<decimal>("DeliveryPrice")
+                    .HasColumnType("money");
 
-                    b.Property<string>("DeliveryDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("DeliveryUniqueCode")
+                    .HasColumnType("nvarchar(40)")
+                    .HasMaxLength(40);
 
-                    b.Property<string>("DeliveryParameters")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("PaymentDescription")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("DeliveryPrice")
-                        .HasColumnType("money");
+                b.Property<string>("PaymentParameters")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DeliveryUniqueCode")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                b.Property<string>("PaymentServiceName")
+                    .HasColumnType("nvarchar(40)")
+                    .HasMaxLength(40);
 
-                    b.Property<string>("PaymentDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.HasKey("Id");
 
-                    b.Property<string>("PaymentParameters")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.ToTable("Orders");
+            });
 
-                    b.Property<string>("PaymentServiceName")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+            modelBuilder.Entity("Store.Data.OrderItemDto", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                b.Property<int>("BookId")
+                    .HasColumnType("int");
 
-                    b.ToTable("Orders");
-                });
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-            modelBuilder.Entity("Store.DTO.OrderItemDto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                b.Property<int>("OrderId")
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                b.Property<decimal>("Price")
+                    .HasColumnType("money");
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
+                b.HasKey("Id");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.HasIndex("OrderId");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                b.ToTable("OrderItems");
+            });
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItems");
-                });
-
-            modelBuilder.Entity("Store.DTO.OrderItemDto", b =>
-                {
-                    b.HasOne("Store.DTO.OrderDto", "Order")
-                        .WithMany("Items")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("Store.DTO.OrderDto", b =>
-                {
-                    b.Navigation("Items");
-                });
+            modelBuilder.Entity("Store.Data.OrderItemDto", b =>
+            {
+                b.HasOne("Store.Data.OrderDto", "Order")
+                    .WithMany("Items")
+                    .HasForeignKey("OrderId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 #pragma warning restore 612, 618
         }
     }

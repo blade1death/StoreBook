@@ -219,6 +219,8 @@ namespace Store.domain
             var order = GetOrder();
             order.Payment = payment;
             orderRepository.Update(order);
+
+            Session.RemoveCart();
             return Map(order);
         }
     }

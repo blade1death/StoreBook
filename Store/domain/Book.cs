@@ -69,7 +69,7 @@ namespace Store.domain
                                 .Replace(" ", "")
                                 .ToUpper();
 
-            return Regex.IsMatch(formattedIsbn, @"Isbn\d{6}");
+            return Regex.IsMatch(formattedIsbn, @"^ISBN\d{10}(\d{3})?$");
         }
 
         public static bool IsIsbn(string isbn)

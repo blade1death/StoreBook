@@ -5,6 +5,7 @@ using Store.DTO;
 
 namespace Store.domain
 {
+
     public class Order
     {
         private readonly OrderDto dto;
