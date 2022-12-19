@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -12,6 +13,7 @@ namespace Store.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            
             migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
@@ -98,6 +100,7 @@ namespace Store.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+           
         }
     }
 }

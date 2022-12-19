@@ -28,9 +28,17 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link active" data-bs-toggle="dropdown" aria-current="page" href="#">
+                                <img src="~/free-icon-add-friend-1946423.png"></img>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <partial name="_LoginPartial" />
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active " data-bs-toggle="dropdown"  aria-current="page" href="#">
                                 <img src="~/shopping-cart.png"></img>
-                             </a>
-                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
                                     <a class="dropdown-item" href="#">
                                         @{
@@ -45,13 +53,10 @@
                                         }
                                     </a>
                                 </li>
-                             </ul>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><i class="fa-regular fa-magnifying-glass"></i></i></a>
-                        </li>
-
                     </ul>
+                    
                     <form class="d-flex" action="@Url.Action("Index", "Search")" method="get">
                         <input class="form-control me-2" type="search" name="query" placeholder="Автор или название" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Искать</button>

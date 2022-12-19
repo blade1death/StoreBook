@@ -1,9 +1,13 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using Store.Models;
+
 namespace Store.infrastructure
 {
     class DbContextFactory
     {
         private readonly IHttpContextAccessor httpContextAccessor;
+        
 
         public DbContextFactory(IHttpContextAccessor httpContextAccessor)
         {
@@ -20,5 +24,6 @@ namespace Store.infrastructure
 
             return dbContexts[repositoryType];
         }
+
     }
 }

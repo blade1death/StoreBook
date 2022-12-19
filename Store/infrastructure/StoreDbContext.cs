@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
 using Store.DTO;
+using Store.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace Store.infrastructure
 {
@@ -10,7 +13,6 @@ namespace Store.infrastructure
         public DbSet<BookDto> Books { get; set; }
 
         public DbSet<OrderDto> Orders { get; set; }
-
         public DbSet<OrderItemDto> OrderItems { get; set; }
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options)
@@ -75,7 +77,7 @@ namespace Store.infrastructure
                     (a, p) => HashCode.Combine(HashCode.Combine(a, p.Key.GetHashCode()), p.Value.GetHashCode())
                 )
             );
-
+        
         private static void BuildBooks(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BookDto>(action =>
