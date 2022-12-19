@@ -6,27 +6,58 @@
     <title>@ViewData["Title"] - интернет-магазин на C#</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Интернет-магазин на C#</a>
-            <form class="form-inline my-2 my-lg-0" action="@Url.Action("Index", "Search")" method="get">
-                <input class="form-control mr-sm-2" type="search" name="query" placeholder="автор или название" />
-                <button class="btn btn-primary my-2 my-sm-0" type="submit">Искать</button>
-            </form>
-            <span class="navbar-text ml-auto">
-                @{
-                    if (Context.Session.TryGetCart(out Cart cart) && cart.TotalCount > 0)
-                    {
-                        <a href="@Url.Action("Index","Order")">Товаров @cart.TotalCount на сумму @cart.TotalPrice</a>
-                    }
-                    else
-                    {
-                        @:Корзина пуста
-                    }
-                }
-            </span>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area=""  asp-controller="Home" asp-action="Index"><img src="~/logo.png" alt="logo" width="65" height="50"></img></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" asp-area=""  asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                       
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active" data-bs-toggle="dropdown" aria-current="page" href="#">
+                                <img src="~/shopping-cart.png"></img>
+                             </a>
+                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        @{
+                                            if (Context.Session.TryGetCart(out Cart cart) && cart.TotalCount > 0)
+                                            {
+                                                <a href="@Url.Action("Index","Order")">Товаров @cart.TotalCount на сумму @cart.TotalPrice</a>
+                                            }
+                                            else
+                                            {
+                                                @:Корзина пуста
+                                            }
+                                        }
+                                    </a>
+                                </li>
+                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><i class="fa-regular fa-magnifying-glass"></i></i></a>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" action="@Url.Action("Index", "Search")" method="get">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Автор или название" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Искать</button>
+                    </form>
+                </div>
+            </div>
         </nav>
     </header>
     <div class="container">
@@ -34,7 +65,7 @@
             @RenderBody()
         </main>
     </div>
-
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -12,9 +12,31 @@
 else
 {
     <ul>
-        @foreach (var book in Model)
-        {
-            <li><a href="@Url.Action("Index","Book",new {id=book.Id})">@book.Title</a></li>
-        }
+
+            <section class="main-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                        @foreach (var book in Model)
+                        {
+                            <div class="product-cart">
+                                <div class="product-thimb">
+                                    <a href="@Url.Action("Index","Book",new {id=book.Id})"><img src="~/product-6-217x300.jpg" alt=""></img></a>
+                                </div>
+                                <div class="product-details">
+                                    <h4><a href="@Url.Action("Index","Book",new {id=book.Id})">@book.Title</a></h4>
+
+                                </div>
+                                <div class="product-bottom-details">
+                                    <div class="product-price">
+                                        @book.Price
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    </div>
+                </div>
+            </section>
     </ul>
 }

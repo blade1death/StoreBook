@@ -79,7 +79,7 @@ namespace Store.domain
         public int TotalCount => Items.Sum(item => item.Count);
 
         public decimal TotalPrice => Items.Sum(item => item.Price * item.Count)
-                                   + (Delivery?.Price ?? 0m);
+                                   ;
 
         public Order(OrderDto dto)
         {
