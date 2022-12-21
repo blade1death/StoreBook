@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Store.infrastructure
 {
-    public class StoreDbContext : DbContext
+    public class StoreDbContext : IdentityDbContext
     {
         public DbSet<BookDto> Books { get; set; }
 
@@ -21,6 +21,7 @@ namespace Store.infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             BuildBooks(modelBuilder);
             BuildOrders(modelBuilder);
             BuildOrderItems(modelBuilder);

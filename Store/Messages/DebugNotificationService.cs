@@ -15,9 +15,9 @@ namespace Store.Messages
         }
         public void StartProcess(Order order)
         {
-            MailAddress from = new MailAddress("test", "серГЕЙ");
+            MailAddress from = new MailAddress("your@gmail.com", "yourname");
             // кому отправляем
-            MailAddress to = new MailAddress("test");
+            MailAddress to = new MailAddress("to@gmail.com");
             // создаем объект сообщения
             MailMessage m = new MailMessage(from, to);
             // тема письма
@@ -29,7 +29,7 @@ namespace Store.Messages
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
             // логин и пароль
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("test", "test");
+            smtp.Credentials = new NetworkCredential("your@gmail.com", "password");
             
             smtp.EnableSsl = true;
             smtp.Send(m);

@@ -14,28 +14,21 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area=""  asp-controller="Home" asp-action="Index"><img src="~/logo.png" alt="logo" width="65" height="50"></img></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/logo.png" alt="logo" width="65" height="50"></img></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" asp-area=""  asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                       
+
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <partial name="_LoginPartial" />
                         <li class="nav-item dropdown">
-                            <a class="nav-link active" data-bs-toggle="dropdown" aria-current="page" href="#">
-                                <img src="~/free-icon-add-friend-1946423.png"></img>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <partial name="_LoginPartial" />
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active " data-bs-toggle="dropdown"  aria-current="page" href="#">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-current="page" href="#">
                                 <img src="~/shopping-cart.png"></img>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -55,8 +48,8 @@
                                 </li>
                             </ul>
                         </li>
+
                     </ul>
-                    
                     <form class="d-flex" action="@Url.Action("Index", "Search")" method="get">
                         <input class="form-control me-2" type="search" name="query" placeholder="Автор или название" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Искать</button>
@@ -70,7 +63,7 @@
             @RenderBody()
         </main>
     </div>
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
